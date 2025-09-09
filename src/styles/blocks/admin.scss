@@ -1,0 +1,77 @@
+.admin {
+  &__sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: $main-text-color;
+    color: $mainColor;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+  }
+
+  &__name {
+    margin-bottom: 20px;
+  }
+
+  &__lists {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__list {
+    margin: 15px 0;
+
+    a {
+      color: $mainColor;
+      text-decoration: none;
+    }
+  }
+
+  &__section {
+    display: none;
+  }
+
+  &__main-content {
+    margin-left: 220px;
+    padding: 20px;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: 1px solid $catalogFilterColor;
+
+    th, td {
+      border: 1px solid $catalogFilterColor;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: $main-text-color;
+      color: $mainColor;
+    }
+  }
+
+  &__button {
+    padding: 10px 20px;
+    background-color: $main-text-color;
+    color: $mainColor;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $colorFormHover;
+    }
+  }
+}
+
+.delete-btn {
+  color: $main-text-color;
+  border: none;
+  padding: 5px 5px;
+  cursor: pointer;
+}
+

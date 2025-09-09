@@ -1,0 +1,33 @@
+.return {
+
+  @include on-mobile {
+    padding: 0 20px;
+  }
+
+  @include on-tablet {
+    padding: 20px 80px;
+  }
+
+  &__name {
+    padding-bottom: 20px;
+  }
+
+  &__item {
+    color: #3a3737;
+
+    &--active {
+      font-weight: 700;
+    }
+  }
+
+  &__container {
+    &-point {
+      padding: 15px 0;
+    }
+  }
+
+  &__lists {
+    list-style-type: none;
+    padding: 0;
+  }
+}

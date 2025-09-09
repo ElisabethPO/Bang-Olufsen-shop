@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-transform: capitalize;
+  transition: all .2s linear;
+}
+
+.order {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+
+  @include on-mobile {
+    padding: 40px;
+  }
+
+  &__form {
+    padding: 20px;
+    width: 700px;
+    background: $colorBackAboutUs;
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+    padding: 20px;
+    width: 700px;
+    background: $colorBackAboutUs;
+    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+
+    &-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    &-col {
+      flex: 1 1 250px;
+    }
+  }
+
+  &__title {
+    font-size: 20px;
+    color: $catalogitemColor;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+
+    @include on-mobile {
+      font-size: 16px;
+    }
+  }
+
+  &__submit-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 17px;
+    border-radius: 6px;
+    background: $colorFormHover;
+    color: $mainColor;
+    margin-top: 5px;
+    cursor: pointer;
+
+    @include on-mobile {
+      font-size: 14px;
+      padding: 10px;
+    }
+
+    &:hover {
+      background: $main-text-color;
+    }
+  }
+}
+
+.inputBox {
+  margin: 15px 0;
+
+  span {
+    margin-bottom: 10px;
+    display: block;
+
+    @include on-mobile {
+      font-size: 14px;
+    }
+  }
+
+  input {
+    width: 100%;
+    border: 1px solid $btnColorCart;
+    border-radius: 6px;
+    padding: 10px 15px;
+    font-size: 15px;
+    text-transform: none;
+
+    @include on-mobile {
+      padding: 8px 10px;
+    }
+
+    img {
+      height: 34px;
+      margin-top: 5px;
+      filter: drop-shadow(0 0 1px $main-text-color);
+    }
+
+    &:focus {
+      border: 2px solid $colorFormHover;
+    }
+  }
+}
+
+.flex {
+  display: flex;
+  gap: 15px;
+
+  &__inputBox {
+    margin-top: 5px;
+  }
+}

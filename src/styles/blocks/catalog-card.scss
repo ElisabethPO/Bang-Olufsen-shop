@@ -1,0 +1,205 @@
+.stars {
+  display: flex;
+  flex-direction: row;
+
+  &__star {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+    background-image: url(../images/catalog/star.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+.stars--0 .stars__star:nth-child(-n + 0),
+.stars--1 .stars__star:nth-child(-n + 1),
+.stars--2 .stars__star:nth-child(-n + 2),
+.stars--3 .stars__star:nth-child(-n + 3),
+.stars--4 .stars__star:nth-child(-n + 4),
+.stars--5 .stars__star:nth-child(-n + 5) {
+  background-image: url(../images/catalog/star-active.svg);
+}
+
+.product {
+  position: relative;
+  width: 200px;
+  min-height: 408px;
+  border: 1px solid $cardColorBorder;
+  border-radius: $cardBorderRadius;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0 16px;
+
+  @include on-mobile {
+    width: 150px;
+  }
+
+  @include on-tablet {
+    width: 150px;
+  }
+
+  &__top {
+    margin: 32px auto 40px;
+  }
+
+  &__image {
+    top: 0;
+    left: 0;
+    width: 160px;
+    height: 174px;
+    display: block;
+  }
+
+  &__image > img {
+    object-fit: contain;
+    width: 190px;
+    height: 134px;
+  }
+
+  &__title {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    margin-bottom: 4px;
+    color: $cardColorPriceProduct;
+
+    a {
+      text-decoration: none;
+      color: $colorBackActiveButton;
+    }
+  }
+
+  &__code {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    color: $cardColorProductCode;
+    margin-bottom: 16px;
+  }
+
+  &__price {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &-name {
+      color: $cardColorProductCode;
+      font-size: 12px;
+      line-height: 18px;
+      margin-bottom: 16px;
+    }
+
+    &-value {
+      color: $cardColorPriceProduct;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 18px;
+
+      @include on-tablet {
+        font-size: 14px;
+      }
+    }
+
+    &-oldvalue {
+      margin-left: 2px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: line-through;
+      color: $priceColor;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.2);
+    transition-duration: 300ms;
+
+    .product__title {
+      color: $cardTitleColorHover;
+    }
+  }
+
+  &__button {
+    display: inline-flex;
+    justify-content: center;
+    margin-bottom: 16px;
+    width: 100%;
+    height: $buttonHeight;
+    border-radius: $buttonBorderRadius;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    background-color: $colorFormHover;
+    border-color: $colorFormHover;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 14px;
+    color: $cardColorButtonLink;
+    text-decoration: none;
+
+    &:hover {
+      border: 1px solid $colorFormHover;
+      background-color: $cardColorButtonLink;
+      color: $cardColorPriceProduct;
+      transition-duration: 300ms;
+    }
+  }
+}
+
+.product-prop {
+  display: inline-block;
+  position: absolute;
+  padding-left: 20px;
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: $main-text-color;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+.feedbacks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 24px;
+
+  &__review {
+    display: flex;
+    font-size: 10px;
+    line-height: 14px;
+    font-weight: 400;
+    align-items: end;
+    margin-bottom: -1px;
+  }
+}
+
+.new {
+  color: $colorFormHover;
+  background-image: url(../images/icons/bolt.svg);
+}
+
+.sale {
+  color: $colorFormHover;
+  background-image: url(../images/icons/percent.svg);
+}
+
+.best {
+  color: $colorFormHover;
+  background-image: url(../images/icons/bestsel.svg);
+}
+
+body {
+  margin: 0;
+}
+
+p,
+h2,
+h3 {
+  margin: 0;
+}

@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en" class="page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>BANG & OLUFSEN</title>
+    <link
+      rel="stylesheet"
+      href="./styles/admin-panel.scss"
+    />
+    <link
+      rel="icon"
+      href="./images/icons/icon-iphone.png"
+      type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  </head>
+  <body class="page__body">
+
+    <div class="admin__sidebar">
+      <h2 class="admin__name">Admin Panel</h2>
+      <ul class="admin__lists">
+        <li class="admin__list"><a href="#products" onclick="showSection('products')">Products</a></li>
+        <li class="admin__list"><a href="#orders" onclick="showSection('orders')">Orders</a></li>
+      </ul>
+    </div>
+
+    <div class="admin__main-content">
+      <div id="products" class="admin__section-product">
+        <h2 class="admin__section-name">Products</h2>
+        <button onclick="loadProducts()" class="admin__button">Load Products</button>
+        <table class="admin__table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Image</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="product-list">
+          </tbody>
+        </table>
+      </div>
+
+      <div id="orders" class="admin__section">
+        <h2 class="admin__section-name">Orders</h2>
+        <button onclick="loadOrders()" class="admin__button">Load Orders</button>
+        <table class="admin__table">
+          <thead>
+            <tr>
+              <th>Order number</th>
+              <th>Product names</th>
+              <th>Total quantity of products</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="order-list">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      function showSection(section) {
+        const sections = document.querySelectorAll('.admin__section');
+        sections.forEach(sec => sec.style.display = 'none');
+        document.getElementById(section).style.display = 'block';
+      }
+
+      async function loadProducts() {
+          try {
+              const response = await fetch('http://localhost:5000/api/products');
+
+              if (!response.ok) {
+                  throw new Error(`Ошибка HTTP: ${response.status}`);
+              }
+
+              const products = await response.json();
+              const productList = document.getElementById('product-list');
+              productList.innerHTML = '';
+
+              products.forEach(product => {
+                  const row = document.createElement('tr');
+                  row.innerHTML = `
+                      <td>${product._id}</td>
+                      <td><input type="text" value="${product.name}" id="name-${product._id}" /></td>
+                      <td><input type="number" value="${product.price}" id="price-${product._id}" /></td>
+                      <td>
+                          <img src="${product.picture ? `data:image/jpeg;base64,${product.picture}` : 'placeholder.jpg'}"
+                            alt="${product.name}"
+                            class="product__image"
+                            width="50"
+                            height="50">
+                          <textarea id="image-${product._id}" rows="4">${product.image}</textarea>
+                      </td>
+                      <td>
+                          <button onclick="updateProduct('${product._id}')">Save</button>
+                          <button onclick="deleteProduct('${product._id}')">Delete</button>
+                      </td>
+                  `;
+                  productList.appendChild(row);
+              });
+
+              console.log('Загруженные товары:', products);
+          } catch (error) {
+              console.error('Ошибка загрузки товаров:', error);
+          }
+      }
+
+      function convertToBase64(productId) {
+          const fileInput = document.getElementById(`file-${productId}`);
+          const imageField = document.getElementById(`image-${productId}`);
+
+          if (fileInput.files.length > 0) {
+              const file = fileInput.files[0];
+              const reader = new FileReader();
+
+              reader.onloadend = function () {
+                  imageField.value = reader.result;
+              };
+
+              reader.readAsDataURL(file);
+          }
+      }
+
+      async function updateProduct(productId) {
+          const name = document.getElementById(`name-${productId}`).value;
+          const price = document.getElementById(`price-${productId}`).value;
+          const imageBase64 = document.getElementById(`image-${productId}`).value;
+
+          const updatedProduct = {
+              name,
+              price,
+              image: imageBase64
+          };
+
+          try {
+              const response = await fetch(`http://localhost:5000/api/products/${productId}`, {
+                  method: 'PUT',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(updatedProduct)
+              });
+
+              if (!response.ok) {
+                  throw new Error(`Ошибка HTTP: ${response.status}`);
+              }
+
+              alert('Продукт обновлен!');
+              loadProducts();
+          } catch (error) {
+              console.error('Ошибка обновления товара:', error);
+          }
+      }
+
+      async function deleteProduct(productId) {
+          if (!confirm('Вы уверены, что хотите удалить этот товар?')) return;
+
+          try {
+              const response = await fetch(`/api/products/${productId}`, {
+                  method: 'DELETE'
+              });
+
+              if (!response.ok) {
+                  throw new Error(`Ошибка HTTP: ${response.status}`);
+              }
+
+              alert('Продукт удален!');
+              loadProducts();
+          } catch (error) {
+              console.error('Ошибка удаления товара:', error);
+          }
+      }
+
+
+      async function loadOrders() {
+        try {
+            const response = await fetch('http://localhost:5000/api/orders');
+
+            if (!response.ok) {
+                throw new Error(`Ошибка HTTP: ${response.status}`);
+            }
+
+            const orders = await response.json();
+            const orderList = document.getElementById('order-list');
+            orderList.innerHTML = '';
+
+            orders.forEach(order => {
+                const totalQuantity = order.products.reduce((total, product) => total + product.quantity, 0);
+                const productNames = order.products.map(product => product.name).join(', ');
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${order._id}</td>
+                    <td>${productNames}</td>
+                    <td>${totalQuantity}</td>
+                    <td>${order.status}</td>
+                    <td><button class="delete-btn" data-id="${order._id}">Delete</button></td>
+                `;
+                orderList.appendChild(row);
+            });
+
+            const deleteButtons = document.querySelectorAll('.delete-btn');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', async (e) => {
+                    const orderId = e.target.getAttribute('data-id');
+                    try {
+                        const response = await fetch(`http://localhost:5000/api/orders/${orderId}`, {
+                            method: 'DELETE',
+                        });
+
+                        if (response.ok) {
+                            alert('The order has been successfully deleted.');
+                            loadOrders();
+                        } else {
+                            alert('Error deleting order');
+                        }
+                    } catch (error) {
+                        console.error('Error deleting order', error);
+                        alert('Error deleting order');
+                    }
+                });
+            });
+
+                console.log('Uploaded orders:', orders);
+            } catch (error) {
+                console.error('Error loading orders:', error);
+            }
+          }
+    </script>
+  </body>
+</html>

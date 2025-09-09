@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+footer {
+  justify-content: center;
+  margin-top: 50px;
+  min-height: 30vh;
+  font-size: 62.5%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background: $backColorDelivery;
+  color: $mainColor;
+}
+
+footer a {
+  margin-bottom: 20px;
+  color: $catalogFilterColor;
+  font-size: 14px;
+  transition: 0.5s;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer .ft-title {
+  margin-bottom: 10px;
+  font-size: 26px;
+  padding-bottom: 0.5rem;
+}
+
+.ft-main {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1.5rem 2rem;
+}
+
+.ft-main-item {
+  padding: 1.5rem;
+  min-width: 13rem;
+}
+
+.container {
+  flex: 1;
+}
+
+@include on-desktop {
+  .ft-main {
+    justify-content: space-evenly;
+  }
+}
+
+@include on-tablet {
+  .ft-main {
+    justify-content: space-evenly;
+  }
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+form input[type="mail"] {
+  padding: 0.7rem;
+  margin-top: 0.5rem;
+}
+
+form input[type="submit"] {
+  color: $mainColor;
+  background: $colorFormHover;
+  padding: 0.7rem;
+  cursor: pointer;
+}

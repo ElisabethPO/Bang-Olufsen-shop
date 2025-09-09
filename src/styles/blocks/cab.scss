@@ -1,0 +1,184 @@
+.cab-container {
+  box-sizing: border-box;
+  background-color: $colorBackAboutUs;
+  max-width: 1024px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: $mainColor;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  @include on-desktop {
+    padding: 15px;
+  }
+
+  @include on-tablet {
+    padding: 10px;
+  }
+}
+
+.cab-header {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px;
+  border-bottom: 1px solid $toggleColor;
+
+  &__name {
+    font-size: 24px;
+    padding-bottom: 15px;
+
+    @include on-tablet {
+      font-size: 20px;
+    }
+
+    @include on-desktop {
+      font-size: 32px;
+    }
+  }
+
+  @include on-desktop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+  }
+}
+
+.cab-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  a {
+    text-decoration: none;
+    color: $catalogitemColor;
+    font-weight: 700;
+
+    @include on-tablet {
+      font-size: 14px;
+    }
+
+    &:hover {
+      color: $colorFormHover;
+    }
+  }
+
+  @include on-desktop {
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+
+.section {
+  display: none;
+  padding: 20px 20px;
+  border-bottom: 1px solid $colorInfo;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__name {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: $colorFormHover;
+
+    @include on-tablet {
+      font-size: 16px;
+    }
+  }
+}
+
+.section.active {
+  display: block;
+}
+
+
+.name__detail {
+  padding-top: 40px;
+}
+
+.profile-info {
+  display: block;
+
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid $btnColorCart;
+    border-radius: 4px;
+  }
+}
+
+.profile__data {
+  display: block;
+  margin: 5px 0 5px;
+}
+
+.payment-methods {
+  input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid $btnColorCart;
+    border-radius: 4px;
+  }
+}
+
+.btn {
+  display: block;
+  padding: 10px 20px;
+  background-color: $colorFormHover;
+  color: $mainColor;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $main-text-color;
+  }
+
+  @include on-tablet {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+.payment-method {
+
+}
+
+.settings-form {
+  label {
+    display: block;
+    margin: 10px 0 5px;
+  }
+
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid $btnColorCart;
+    border-radius: 4px;
+  }
+}
+
+.confirmation-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: none;
+
+  button {
+    margin-top: 10px;
+    padding: 5px 10px;
+  }
+}

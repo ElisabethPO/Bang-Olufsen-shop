@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" class="page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>BANG & OLUFSEN</title>
+    <link
+      rel="stylesheet"
+      href="./styles/blocks/admin-login.scss"
+    />
+    <link
+      rel="icon"
+      href="./images/icons/icon-iphone.png"
+      type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script
+      src="./js/main.js"
+      type="module"
+      defer
+    ></script>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>Admin Login</h2>
+      <input type="password" id="admin-password"
+      placeholder="Введите пароль">
+      <button onclick="checkPassword()">Login</button>
+      <p id="error-message" class="error-message">Incorrect password</p>
+      <button class="back-button" onclick="goBack()">Back</button>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('admin-password').value;
+            const correctPassword = "admin123";
+            if (password === correctPassword) {
+                window.location.href = "admin.html";
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+            }
+        }
+
+        function goBack() {
+            window.location.href = "index.html";
+        }
+    </script>
+  </body>
+</html>

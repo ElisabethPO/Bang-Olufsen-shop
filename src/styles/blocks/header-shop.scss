@@ -1,0 +1,14 @@
+.header {
+  margin-bottom: 0;
+  padding-bottom: 0;
+
+  &__cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.header-shop {
+  box-sizing: content-box !important;
+}

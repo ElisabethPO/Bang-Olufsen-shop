@@ -1,0 +1,68 @@
+.product {
+  position: relative;
+
+  &__image {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+    img {
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+  }
+
+  &__sale {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    z-index: 20;
+    border: 2px solid $main-text-color;
+    padding: 4px 10px;
+    font-weight: 700;
+    color: $main-text-color;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  &__photo {
+    width: 100%;
+
+    @include hover(transform, scale(1.1));
+  }
+
+  &__category {
+    padding-right: 44px;
+  }
+
+  &__price {
+    padding-top: 12px;
+    font-weight: 700;
+    font-size: 13px;
+    color: $main-text-color;
+  }
+
+  &__prop {
+    margin-bottom: 10px;
+  }
+}
+
+.product-prop {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  padding-left: 22px;
+  background-position: left center;
+  background-repeat: no-repeat;
+  color: $colorFormHover;
+}
+
+.new {
+  background-image: url(../images/icons/bolt.svg);
+}
+
+.best {
+  background-image: url(../images/icons/bestsel.svg);
+}
+

@@ -1,0 +1,52 @@
+.return {
+  padding: 20px 20px;
+  max-width: 1024px;
+  margin: 0 auto;
+
+  @include on-mobile {
+    padding: 0 20px;
+  }
+
+  @include on-tablet {
+    padding: 20px 80px;
+  }
+
+  &__name {
+    padding-bottom: 20px;
+
+    @include on-mobile {
+      padding-top: 30px;
+      font-size: 22px;
+    }
+  }
+
+  &__item {
+    color: #3a3737;
+
+    &--active {
+      font-weight: 700;
+    }
+  }
+
+  &__container {
+    &-point {
+      padding: 15px 0;
+
+      @include on-mobile {
+        font-size: 16px;
+      }
+    }
+
+    p {
+      @include on-mobile {
+        font-size: 12px;
+      }
+    }
+  }
+
+  &__list {
+    @include on-mobile {
+      font-size: 12px;
+    }
+  }
+}
