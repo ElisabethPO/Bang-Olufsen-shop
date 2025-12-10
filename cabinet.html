@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en" class="page">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BANG & OLUFSEN</title>
+    <link rel="stylesheet" href="/cabinet.feea488e.css">
+    <link rel="icon" href="/icon-iphone.0f36d731.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="/cabinet.878649a9.js" defer=""></script>
+  </head>
+  <body class="page__body">
+    <header class="header-shop">
+      <div class="container">
+        <div class="header__cont">
+          <div class="top-bar">
+            <a href="/index.html" class="top-bar__logo-link">
+              <img src="/Logo%20(1).aa5365f1.png" class="top-bar__logo" alt="Bang logo">
+            </a>
+
+            <div class="top-bar__icons">
+              <a href="/cart.html" class="icon icon--bin"></a>
+              <a href="#" class="icon icon--search" id="search-icon"></a>
+              <div id="search-bar" class="icon__search-bar">
+                <input type="text" placeholder="Search">
+              </div>
+              <a href="/pers-info.html" class="icon icon--person"></a>
+              <a href="#menu" class="icon icon--menu"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <aside class="menu page__menu" id="menu">
+      <div class="container">
+        <div class="top-bar menu__top">
+          <a href="#" class="top-bar__logo">
+            <img src="/logo.cd13699a.svg" alt="Bang logo">
+          </a>
+
+          <a href="#" class="icon icon--close"></a>
+        </div>
+        <div class="menu__bottom">
+          <nav class="nav menu__nav">
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a class="nav__link" href="/page2.html">Speakers</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="/headphones.html">Headphones</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="/soundbars.html">Soundbars</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="/televisions.html">Televisions</a>
+              </li>
+            </ul>
+          </nav>
+
+          <a href="tel:+1 234 5555-55-55" class="menu__phone-number">
+            +1 234 5555-55-55
+          </a>
+          <a href="tel:+1 234 5555-55-55" class="menu__call-to-order">
+            Call to order
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <div class="cab-container">
+      <div class="cab-header">
+        <h1 class="cab-header__name">My dashboard</h1>
+        <nav class="cab-nav">
+          <a href="#profile" onclick="showSection('profile')">My profile</a>
+          <a href="#orders" onclick="showSection('orders')">My orders</a>
+          <a href="#settings" onclick="showSection('settings')">Settings</a>
+        </nav>
+      </div>
+
+      <div id="profile" class="section active">
+        <h2 class="section__name">My profile</h2>
+        <form class="profile-info" onsubmit="checkChanges(event)" id="user-info">
+          <label class="profile-info__data" for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Type your name and surname" required="">
+
+          <label class="profile__data" for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="email@gmail.com" required="">
+
+          <label class="profile__data" for="name">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="+1 111 111 1111" required="">
+
+          <button class="btn" type="submit">Save changes</button>
+        </form>
+
+        <!-- <form action="#" class="form"
+        method="post" enctype="multipart/form-data">
+          <label class="form__label">
+            <input type="text" class="input input-name"
+            data-validate-field="name" name="name"
+            placeholder="Type your name and surname">
+          </label>
+          <label class="form__label">
+            <input type="email" class="input input-mail"
+            data-validate-field="email" name="email"
+            placeholder="Type your email">
+          </label>
+          <label class="form__label">
+            <input type="tel" class="input input-tel"
+            data-validate-field="tel" name="tel"
+            placeholder="Type your phone number">
+          </label>
+          <input type="file" name="file[]"
+          multiple id="myfile">
+          <button class="button">Send</button>
+        </form> -->
+
+        <h2 class="section__name name__detail">Payment details</h2>
+        <form class="payment-methods" method="post" enctype="multipart/form-data">
+          <label class="profile__data" for="name">Payment method</label>
+          <select name="payment-method" id="payment-method">
+            <option value="card" selected="">Bank card</option>
+            <option value="cash">Cash</option>
+          </select>
+
+          <label class="profile__data" for="delivery-method">Delivery method</label>
+          <select name="delivery-method" id="delivery-method">
+            <option value="delivery" selected="">Home delivery</option>
+            <option value="locker">Parcel machine</option>
+          </select>
+
+          <label class="profile__data" for="name">Delivery address</label>
+          <input type="text" id="address" name="address" value="123 Main St, Apt 4B New York, NY 10001 USA">
+
+          <button class="btn" type="submit">Save changes</button>
+        </form>
+      </div>
+
+      <div id="orders" class="section">
+        <h2 class="section__name">My orders</h2>
+        <div class="orders-list">
+          <p><strong>Order #12345</strong> - Status: Delivered</p>
+          <p><strong>Order #12346</strong> - Status: In transit</p>
+          <p><strong>Order #12347</strong> - Status: Pending</p>
+        </div>
+      </div>
+
+      <div id="settings" class="section">
+        <h2 class="section__name">Settings</h2>
+        <form class="settings-form" onsubmit="checkChanges(event)">
+          <label for="email-settings">Email</label>
+          <input type="email" id="email-settings" name="email-settings" placeholder="email@gmail.com" required="">
+
+          <label for="password">New password</label>
+          <input type="password" id="password" name="password">
+
+          <button class="btn" type="submit">Save changes</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- <script
+      src="./js/main.js"
+      type="module"
+      defer
+    ></script> -->
+  <script src="/cabinet.c4ccb528.js"></script></body>
+</html>

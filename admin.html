@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en" class="page">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BANG & OLUFSEN</title>
+    <link rel="stylesheet" href="/admin.b776e68f.css">
+    <link rel="icon" href="/icon-iphone.0f36d731.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <!-- <script
+      src="./js/main.js"
+      type="module"
+      defer
+    ></script> -->
+  </head>
+  <body class="page__body">
+
+    <div class="admin__sidebar">
+      <h2 class="admin__name">Admin Panel</h2>
+      <ul class="admin__lists">
+        <li class="admin__list"><a href="#products" onclick="showSection('products')">Products</a></li>
+        <li class="admin__list"><a href="#orders" onclick="showSection('orders')">Orders</a></li>
+        <!-- <li class="admin__list"><a href="#users" onclick="showSection('users')">Users</a></li> -->
+      </ul>
+    </div>
+
+    <div class="admin__main-content">
+      <div id="products" class="admin__section-product">
+        <h2 class="admin__section-name">Products</h2>
+        <button onclick="loadProducts()" class="admin__button">Load Products</button>
+        <table class="admin__table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Image</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="product-list">
+          </tbody>
+        </table>
+      </div>
+
+      <div id="orders" class="admin__section">
+        <h2 class="admin__section-name">Orders</h2>
+        <button onclick="loadOrders()" class="admin__button">Load Orders</button>
+        <table class="admin__table">
+          <thead>
+            <tr>
+              <th>Order number</th>
+              <th>Product names</th>
+              <th>Total quantity of products</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="order-list">
+          </tbody>
+        </table>
+      </div>
+
+      <!-- <div id="users" class="admin__section">
+        <h2 class="admin__section-name">Users</h2>
+        <button onclick="loadUsers()" class="admin__button">Load Users</button>
+        <table class="admin__table">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody id="user-list">
+          </tbody>
+        </table>
+      </div> -->
+    </div>
+
+    <script>function showSection(section) {
+    const sections = document.querySelectorAll('.admin__section');
+    sections.forEach((sec)=>sec.style.display = 'none');
+    document.getElementById(section).style.display = 'block';
+}
+async function loadProducts() {
+    try {
+        const response = await fetch('http://localhost:5000/api/products');
+        if (!response.ok) throw new Error(`\u{41E}\u{448}\u{438}\u{431}\u{43A}\u{430} HTTP: ${response.status}`);
+        const products = await response.json();
+        const productList = document.getElementById('product-list');
+        productList.innerHTML = '';
+        products.forEach((product)=>{
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                      <td>${product._id}</td>
+                      <td><input type="text" value="${product.name}" id="name-${product._id}" /></td>
+                      <td><input type="number" value="${product.price}" id="price-${product._id}" /></td>
+                      <td>
+                          <img src="${product.picture ? `data:image/jpeg;base64,${product.picture}` : 'placeholder.jpg'}"
+                            alt="${product.name}"
+                            class="product__image"
+                            width="50"
+                            height="50">
+                          <textarea id="image-${product._id}" rows="4">${product.image}</textarea>
+                      </td>
+                      <td>
+                          <button onclick="updateProduct('${product._id}')">Save</button>
+                          <button onclick="deleteProduct('${product._id}')">Delete</button>
+                      </td>
+                  `;
+            productList.appendChild(row);
+        });
+        console.log("\u0417\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043D\u044B\u0435 \u0442\u043E\u0432\u0430\u0440\u044B:", products);
+    } catch (error) {
+        console.error("\u041E\u0448\u0438\u0431\u043A\u0430 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0442\u043E\u0432\u0430\u0440\u043E\u0432:", error);
+    }
+}
+// Функция конвертации загруженного файла в Base64
+function convertToBase64(productId) {
+    const fileInput = document.getElementById(`file-${productId}`);
+    const imageField = document.getElementById(`image-${productId}`);
+    if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onloadend = function() {
+            imageField.value = reader.result; // Сохранение Base64-кода в текстовое поле
+        };
+        reader.readAsDataURL(file);
+    }
+}
+// Функция обновления товара
+async function updateProduct(productId) {
+    const name = document.getElementById(`name-${productId}`).value;
+    const price = document.getElementById(`price-${productId}`).value;
+    const imageBase64 = document.getElementById(`image-${productId}`).value;
+    const updatedProduct = {
+        name,
+        price,
+        image: imageBase64
+    };
+    try {
+        const response = await fetch(`http://localhost:5000/api/products/${productId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedProduct)
+        });
+        if (!response.ok) throw new Error(`\u{41E}\u{448}\u{438}\u{431}\u{43A}\u{430} HTTP: ${response.status}`);
+        alert("\u041F\u0440\u043E\u0434\u0443\u043A\u0442 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D!");
+        loadProducts();
+    } catch (error) {
+        console.error("\u041E\u0448\u0438\u0431\u043A\u0430 \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u0442\u043E\u0432\u0430\u0440\u0430:", error);
+    }
+}
+// Функция удаления товара
+async function deleteProduct(productId) {
+    if (!confirm("\u0412\u044B \u0443\u0432\u0435\u0440\u0435\u043D\u044B, \u0447\u0442\u043E \u0445\u043E\u0442\u0438\u0442\u0435 \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u044D\u0442\u043E\u0442 \u0442\u043E\u0432\u0430\u0440?")) return;
+    try {
+        const response = await fetch(`/api/products/${productId}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) throw new Error(`\u{41E}\u{448}\u{438}\u{431}\u{43A}\u{430} HTTP: ${response.status}`);
+        alert("\u041F\u0440\u043E\u0434\u0443\u043A\u0442 \u0443\u0434\u0430\u043B\u0435\u043D!");
+        loadProducts();
+    } catch (error) {
+        console.error("\u041E\u0448\u0438\u0431\u043A\u0430 \u0443\u0434\u0430\u043B\u0435\u043D\u0438\u044F \u0442\u043E\u0432\u0430\u0440\u0430:", error);
+    }
+}
+async function loadOrders() {
+    try {
+        const response = await fetch('http://localhost:5000/api/orders');
+        if (!response.ok) throw new Error(`\u{41E}\u{448}\u{438}\u{431}\u{43A}\u{430} HTTP: ${response.status}`);
+        const orders = await response.json();
+        const orderList = document.getElementById('order-list');
+        orderList.innerHTML = '';
+        orders.forEach((order)=>{
+            const totalQuantity = order.products.reduce((total, product)=>total + product.quantity, 0);
+            const productNames = order.products.map((product)=>product.name).join(', ');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                    <td>${order._id}</td>
+                    <td>${productNames}</td>
+                    <td>${totalQuantity}</td>
+                    <td>${order.status}</td>
+                    <td><button class="delete-btn" data-id="${order._id}">Delete</button></td>
+                `;
+            orderList.appendChild(row);
+        });
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+        deleteButtons.forEach((button)=>{
+            button.addEventListener('click', async (e)=>{
+                const orderId = e.target.getAttribute('data-id');
+                try {
+                    const response = await fetch(`http://localhost:5000/api/orders/${orderId}`, {
+                        method: 'DELETE'
+                    });
+                    if (response.ok) {
+                        alert('The order has been successfully deleted.');
+                        loadOrders();
+                    } else alert('Error deleting order');
+                } catch (error) {
+                    console.error('Error deleting order', error);
+                    alert('Error deleting order');
+                }
+            });
+        });
+        console.log('Uploaded orders:', orders);
+    } catch (error) {
+        console.error('Error loading orders:', error);
+    }
+}
+
+</script>
+  <script src="/admin.0e74c27c.js"></script></body>
+</html>
