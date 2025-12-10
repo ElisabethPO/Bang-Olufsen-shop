@@ -1,8 +1,10 @@
 const catalogContainer = document.querySelector('.catalog-cntr');
 
+const API_BASE_URL = 'https://tech-showcase-store.onrender.com/api';
+
 async function fetchProducts() {
   try {
-    const response = await fetch('http://localhost:5000/api/products');
+    const response = await fetch('${API_BASE_URL}/products');
     if (!response.ok) {
       throw new Error(`Error HTTP: ${response.status}`);
     }
@@ -82,7 +84,7 @@ function renderProducts(products) {
       const productId = this.getAttribute('data-product-id');
       console.log('Product id', productId)
       try {
-        const response = await fetch(`http://localhost:5000/api/products/${productId}`);
+        const response = await fetch(`${API_BASE_URL}/products/${productId}`);
         const productData = await response.json();
 
         if (!response.ok) {
@@ -114,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
 
-        const response = await fetch(`http://localhost:5000/api/products/filter?type=${category}`);
+        const response = await fetch(`${API_BASE_URL}/products/filter?type=${category}`);
         const products = await response.json();
 
 
@@ -181,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const query = selectedFilters.length
           ? `?subCategory=${selectedFilters.join(",")}`
           : "";
-        const response = await fetch(`http://localhost:5000/api/products/filter${query}`);
+        const response = await fetch(`${API_BASE_URL}/products/filter${query}`);
         const products = await response.json();
 
 
@@ -245,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ).map((checkbox) => checkbox.closest('label').dataset.text);
 
       try {
-        const response = await fetch(`http://localhost:5000/api/products/filter?color=${selectedColors.join(',')}`);
+        const response = await fetch(`${API_BASE_URL}/products/filter?color=${selectedColors.join(',')}`);
         const products = await response.json();
         updateProducts(products);
       } catch (error) {
@@ -286,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchRelatedProducts() {
   try {
-    const response = await fetch('http://localhost:5000/api/products/related-products');
+    const response = await fetch('${API_BASE_URL}/products/related-products');
     const products = await response.json();
 
     updateProductList(products);
@@ -313,7 +315,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const productId = event.target.getAttribute("data-product-id");
 
       try {
-        const response = await fetch("http://localhost:5000/api/cart/add", {
+        const response = await fetch("${API_BASE_URL}/cart/add", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ productId }),
@@ -332,7 +334,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function updateCartUI() {
     try {
-      const response = await fetch("http://localhost:5000/api/cart");
+      const response = await fetch("${API_BASE_URL}/cart");
       const cartItems = await response.json();
 
       const cartContainer = document.querySelector(".cart__items");
