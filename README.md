@@ -6,7 +6,7 @@
 
 | Service | Address |
 | :--- | :--- |
-| **Frontend (Catalog)** | [🚀 Visit the Live Tech Showcase Store](https://elisabethpo.github.io/Tech-Showcase-Store/) |
+| **Frontend (Catalog)** | [🚀 Visit the Live Tech Showcase Store](https://elisabethpo.github.io/diploma-frontend/) |
 | **Backend (API)** | [JSON Data: All Products Endpoint](https://tech-showcase-store.onrender.com/api/products) |
 
 ---
