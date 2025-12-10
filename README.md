@@ -1,4 +1,4 @@
-# 📱 Tech Showcase Store (E-commerce Catalog)
+# 📱 Bang & Olufsen shop (E-commerce Catalog)
 
 > This project is a fully deployed Full-Stack application featuring an e-commerce product catalog. It is built using a modern JavaScript stack with a custom API built on Node.js/Express.
 
@@ -6,7 +6,7 @@
 
 | Service | Address |
 | :--- | :--- |
-| **Frontend (Catalog)** | [🚀 Visit the Live Tech Showcase Store](https://elisabethpo.github.io/diploma-frontend/) |
+| **Frontend (Catalog)** | [🚀 Visit the Live Bang & Olufsen shop](https://elisabethpo.github.io/Bang-Olufsen-shop/) |
 | **Backend (API)** | [JSON Data: All Products Endpoint](https://tech-showcase-store.onrender.com/api/products) |
 
 ---
