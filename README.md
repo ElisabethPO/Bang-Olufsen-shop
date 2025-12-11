@@ -56,7 +56,7 @@ To run this project locally, you need to set up both the backend (API) and the f
 1.  Clone the repository:
     ```bash
     git clone [YOUR REPO URL]
-    cd Tech-Showcase-Store
+    cd Bang-Olufsen-shop
     ```
 2.  Install dependencies:
     ```bash
