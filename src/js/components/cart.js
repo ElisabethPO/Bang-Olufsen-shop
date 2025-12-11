@@ -71,11 +71,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   if (!vars.cartProductsList || !totalPriceElement) {
-    console.error("Помилка: Не знайдено vars.cartProductsList или .cart__total-value");
+    console.error("Error: vars.cartProductsList or .cart__total-value not found");
     return;
   }
 
-  console.log("Кошик заповнено!");
+  console.log("Cart full!");
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 

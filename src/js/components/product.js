@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function () {
   const productContainer = document.querySelector('.container-narrow');
   if (!productContainer) {
-    console.error('Ошибка: контейнер .container-narrow не найден на странице');
+    console.error('Error: Container .container-narrow not found on page');
     return;
   }
   console.log('dwqdqwdqwwq')
@@ -12,25 +12,25 @@ document.addEventListener('DOMContentLoaded', async function () {
   let productId = params.get('id')
 
   if (!productId) {
-    console.error('Ошибка: ID товара не указан в URL и не найден в LocalStorage');
+    console.error('Error: Product ID not specified in URL and not found in LocalStorage');
     return;
   }
 
-  console.log('Выбранный товар:', productId);
+  console.log('Selected product:', productId);
 
   try {
     const response = await fetch(`http://localhost:5000/api/products/${productId}`);
     if (!response.ok) {
-      throw new Error(`Ошибка HTTP: ${response.status}`);
+      throw new Error(`Error HTTP: ${response.status}`);
     }
     const product = await response.json();
     if (!product) {
-      console.error('Ошибка: товар не найден');
+      console.error('Error: Product not found');
       return;
     }
 
     const titleElement = document.querySelector('.card-info__title');
-    if (titleElement) titleElement.textContent = product.name || 'Без названия';
+    if (titleElement) titleElement.textContent = product.name || 'Untitled';
 
     const codeElement = document.querySelector('.product__code');
     if (codeElement) codeElement.textContent = `Product code: ${product._id || 'N/A'}`;
@@ -39,12 +39,12 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (priceElement) priceElement.textContent = `$${product.price || '0.00'}`;
 
     const descriptionElement = document.querySelector('.card-info__descr');
-    if (descriptionElement) descriptionElement.textContent = product.description || 'Описание отсутствует';
+    if (descriptionElement) descriptionElement.textContent = product.description || 'Description missing';
 
     const productImage = document.querySelector('.card-slider__main img');
     if (productImage) {
       productImage.src = product.picture ? `data:image/jpeg;base64,${product.picture}` : 'placeholder.jpg';
-      productImage.alt = product.name || 'Изображение товара';
+      productImage.alt = product.name || 'Product image';
     }
 
     const descriptionBlocks = document.querySelectorAll('.card-description__content');
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
   } catch (error) {
-    console.error('Ошибка загрузки данных о товаре:', error);
+    console.error('Error loading product data:', error);
   }
 });
 
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   const relatedProductsContainer = document.querySelector('.card-related__content');
 
   if (!relatedProductsContainer) {
-    console.error('Ошибка: контейнер .card-related__content не найден на странице');
+    console.error('Error: The container .card-related__content was not found on the page.');
     return;
   }
 
@@ -73,13 +73,13 @@ document.addEventListener('DOMContentLoaded', async function () {
   try {
     const response = await fetch('http://localhost:5000/api/products/related-products');
     if (!response.ok) {
-      throw new Error('Ошибка HTTP: ' + response.status);
+      throw new Error('Error HTTP: ' + response.status);
     }
 
     const products = await response.json();
 
     if (products.length === 0) {
-      console.error('Ошибка: не удалось загрузить товары');
+      console.error('Error: Failed to load items');
       return;
     }
 
@@ -112,6 +112,6 @@ document.addEventListener('DOMContentLoaded', async function () {
       relatedProductsContainer.appendChild(productElement);
     });
   } catch (error) {
-    console.error('Ошибка при загрузке данных о товарах:', error);
+    console.error('Error loading product data:', error);
   }
 });

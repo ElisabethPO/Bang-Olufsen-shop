@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let allFilled = true;
 
     inputs.forEach(input => {
-      console.log(`Значение поля "${input.placeholder}": "${input.value}"`);
+      console.log(`Field value "${input.placeholder}": "${input.value}"`);
       if (input.value.trim() === '') {
         allFilled = false;
       }

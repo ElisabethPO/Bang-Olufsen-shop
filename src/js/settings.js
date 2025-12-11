@@ -1,14 +1,21 @@
-const catalogContainer = document.querySelector('.catalog-cntr');
+/* eslint-disable max-len */
+/* global localStorage */ //
+'use strict';
+
+// const catalogContainer = document.querySelector('.catalog-cntr');
 
 const API_BASE_URL = 'https://tech-showcase-store.onrender.com/api';
 
 async function fetchProducts() {
   try {
-    const response = await fetch('${API_BASE_URL}/products');
+    const response = await fetch(`${API_BASE_URL}/products`);
+
     if (!response.ok) {
       throw new Error(`Error HTTP: ${response.status}`);
     }
+
     const products = await response.json();
+
     renderProducts(products);
   } catch (error) {
     console.error('Error loading product list:', error);
@@ -16,7 +23,7 @@ async function fetchProducts() {
 }
 
 function addToCart(product) {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
   const existingProductIndex = cart.findIndex(item => item._id === product._id);
 
@@ -31,10 +38,11 @@ function addToCart(product) {
 }
 
 function updateCartCounter() {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const cartCounter = document.querySelector('.icon__quantity');
+
   if (cartCounter) {
     cartCounter.textContent = totalItems;
   }
@@ -42,11 +50,13 @@ function updateCartCounter() {
 
 function renderProducts(products) {
   const catalogContainer = document.querySelector('.catalog-cntr');
+
   if (!catalogContainer) {
     console.error('Error: container .catalog-cntr not found');
+
     return;
   }
-  console.log('RENDER')
+  console.log('RENDER');
 
   catalogContainer.innerHTML = '';
 
@@ -75,14 +85,15 @@ function renderProducts(products) {
     catalogContainer.insertAdjacentHTML('beforeend', productHTML);
   });
 
-  console.log('RENDER2')
+  console.log('RENDER2');
 
-  console.log('add to buy button')
+  console.log('add to buy button');
 
   document.querySelectorAll('.buy-btn').forEach(button => {
-    button.addEventListener('click', async function () {
+    button.addEventListener('click', async function() {
       const productId = this.getAttribute('data-product-id');
       console.log('Product id', productId)
+
       try {
         const response = await fetch(`${API_BASE_URL}/products/${productId}`);
         const productData = await response.json();
@@ -93,7 +104,7 @@ function renderProducts(products) {
 
         addToCart(productData);
       } catch (error) {
-        console.error('Ошибка при загрузке данных о товаре:', error);
+        console.error('Error loading product data:', error);
       }
     });
   });
@@ -101,27 +112,23 @@ function renderProducts(products) {
   updateCartCounter();
 }
 
-
 document.addEventListener('DOMContentLoaded', fetchProducts);
 
-
-document.addEventListener("DOMContentLoaded", () => {
-  const menuLinks = document.querySelectorAll(".menu__nav .nav__link");
-  const productList = document.querySelector(".catalog-cntr");
+document.addEventListener('DOMContentLoaded', () => {
+  const menuLinks = document.querySelectorAll('.menu__nav .nav__link');
+  const productList = document.querySelector('.catalog-cntr');
 
   menuLinks.forEach((link) => {
-    link.addEventListener("click", async (event) => {
+    link.addEventListener('click', async(event) => {
       event.preventDefault();
+
       const category = link.dataset.category;
 
       try {
-
         const response = await fetch(`${API_BASE_URL}/products/filter?type=${category}`);
         const products = await response.json();
 
-
-        productList.innerHTML = "";
-
+        productList.innerHTML = '';
 
         products.forEach((product) => {
           const productHTML = `
@@ -144,50 +151,52 @@ document.addEventListener("DOMContentLoaded", () => {
                 </p>
                 <a href="#" class="product__button" data-qa="product-hover">Buy</a>
             </article>`;
-          productList.insertAdjacentHTML("beforeend", productHTML);
+
+          productList.insertAdjacentHTML('beforeend', productHTML);
         });
       } catch (error) {
-        console.error("Ошибка при загрузке товаров:", error);
+        console.error("Error loading products:", error);
       }
     });
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   try {
-    const filterItems = document.querySelectorAll(".catalog-filter__items .custom-checkbox__input");
-    const productList = document.querySelector(".catalog-cntr");
+    const filterItems = document.querySelectorAll('.catalog-filter__items .custom-checkbox__input');
+    const productList = document.querySelector('.catalog-cntr');
 
     if (!productList) {
-      console.error('Элемент .catalog-cntr не найден!');
+      console.error('Element .catalog-cntr not found!');
+
       return;
     }
 
-
     const getSelectedFilters = () => {
       const filters = [];
+
       filterItems.forEach((item) => {
         if (item.checked) {
-          const subCategory = item.closest(".custom-checkbox").dataset.text;
+          const subCategory = item.closest('.custom-checkbox').dataset.text;
+
           filters.push(subCategory);
         }
       });
+
       return filters;
     };
 
-
-    const updateProductList = async () => {
+    const updateProductList = async() => {
       const selectedFilters = getSelectedFilters();
 
       try {
         const query = selectedFilters.length
-          ? `?subCategory=${selectedFilters.join(",")}`
-          : "";
+          ? `?subCategory=${selectedFilters.join(',')}`
+          : '';
         const response = await fetch(`${API_BASE_URL}/products/filter${query}`);
         const products = await response.json();
 
-
-        productList.innerHTML = "";
+        productList.innerHTML = '';
 
         products.forEach((product) => {
           const productHTML = `
@@ -210,45 +219,44 @@ document.addEventListener("DOMContentLoaded", () => {
                   </p>
                   <a href="#" class="product__button" data-qa="product-hover">Buy</a>
               </article>`;
-          productList.insertAdjacentHTML("beforeend", productHTML);
+
+          productList.insertAdjacentHTML('beforeend', productHTML);
         });
       } catch (error) {
-        console.error("Ошибка при загрузке товаров:", error);
+        console.error("Error loading products:", error);
       }
     };
 
-
     filterItems.forEach((checkbox) => {
-      checkbox.addEventListener("change", updateProductList);
+      checkbox.addEventListener('change', updateProductList);
     });
-
 
     updateProductList();
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 });
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const colorFilter = document.getElementById('color-filter');
   const productContainer = document.querySelector('.catalog-cntr');
 
   if (!colorFilter || !productContainer) {
-    console.error('Элемент с ID "color-filter" не найден');
+    console.error('Element with ID "color-filter" not found');
+
     return;
   }
 
-  colorFilter.addEventListener('change', async (event) => {
+  colorFilter.addEventListener('change', async(event) => {
     if (event.target.classList.contains('custom-checkbox__input')) {
       const selectedColors = Array.from(
-        colorFilter.querySelectorAll('input:checked')
+        colorFilter.querySelectorAll('input:checked'),
       ).map((checkbox) => checkbox.closest('label').dataset.text);
 
       try {
         const response = await fetch(`${API_BASE_URL}/products/filter?color=${selectedColors.join(',')}`);
         const products = await response.json();
+
         updateProducts(products);
       } catch (error) {
         console.error('Ошибка при фильтрации:', error);
@@ -258,6 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateProducts(products) {
     productContainer.innerHTML = '';
+
     products.forEach((product) => {
       const productElement = `
         <article class="product">
@@ -279,16 +288,15 @@ document.addEventListener('DOMContentLoaded', () => {
           </p>
           <a href="#" class="product__button" data-qa="product-hover">Buy</a>
         </article>`;
+
       productContainer.insertAdjacentHTML('beforeend', productElement);
     });
   }
 });
 
-
-
 async function fetchRelatedProducts() {
   try {
-    const response = await fetch('${API_BASE_URL}/products/related-products');
+    const response = await fetch(`${API_BASE_URL}/products/related-products`);
     const products = await response.json();
 
     updateProductList(products);
@@ -299,50 +307,55 @@ async function fetchRelatedProducts() {
 
 function updateProductList(products) {
   const relatedContainer = document.querySelector('.card-related__content');
+
   relatedContainer.innerHTML = '';
 
   products.forEach(product => {
     const productCard = createProductCard(product);
+
     relatedContainer.appendChild(productCard);
   });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const buyButtons = document.querySelectorAll(".product__buy-btn");
+document.addEventListener('DOMContentLoaded', function() {
+  const buyButtons = document.querySelectorAll('.product__buy-btn');
 
   buyButtons.forEach((button) => {
-    button.addEventListener("click", async (event) => {
-      const productId = event.target.getAttribute("data-product-id");
+    button.addEventListener('click', async(event) => {
+      const productId = event.target.getAttribute('data-product-id');
 
       try {
-        const response = await fetch("${API_BASE_URL}/cart/add", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+        const response = await fetch(`${API_BASE_URL}/cart/add`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ productId }),
         });
 
         if (!response.ok) {
-          throw new Error("Error adding product to cart");
+          throw new Error('Error adding product to cart');
         }
 
         updateCartUI();
       } catch (error) {
-        console.error("Error adding to cart:", error);
+        console.error('Error adding to cart:', error);
       }
     });
   });
 
   async function updateCartUI() {
     try {
-      const response = await fetch("${API_BASE_URL}/cart");
+      const response = await fetch(`${API_BASE_URL}/cart`);
       const cartItems = await response.json();
 
-      const cartContainer = document.querySelector(".cart__items");
-      cartContainer.innerHTML = "";
+      const cartContainer = document.querySelector('.cart__items');
+
+      cartContainer.innerHTML = '';
 
       cartItems.forEach((item) => {
-        const cartItem = document.createElement("div");
-        cartItem.classList.add("cart__item");
+        const cartItem = document.createElement('div');
+
+        cartItem.classList.add('cart__item');
+
         cartItem.innerHTML = `
           <img src="${item.product.picture || 'default.jpg'}" class="cart__image">
           <div class="cart__details">
@@ -359,9 +372,10 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       const totalValue = cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
-      document.querySelector(".cart__total-value").textContent = `$${totalValue.toFixed(2)}`;
+
+      document.querySelector('.cart__total-value').textContent = `$${totalValue.toFixed(2)}`;
     } catch (error) {
-      console.error("Error updating cart:", error);
+      console.error('Error updating cart:', error);
     }
   }
 });
