@@ -20,6 +20,7 @@ import {resizeContent} from './functions/resize';
 import {scrollTo} from './functions/smooth-scroll';
 import {disableScroll, enableScroll} from './functions/stop-scroll';
 // import SimpleBar from 'simplebar';
+import '../styles/index.scss';
 
 
 new SimpleBar(document.querySelector('.card-description__left'), {
