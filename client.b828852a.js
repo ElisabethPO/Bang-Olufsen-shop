@@ -691,6 +691,7 @@ var _resize = require("./functions/resize");
 var _smoothScroll = require("./functions/smooth-scroll");
 var _stopScroll = require("./functions/stop-scroll");
 // import SimpleBar from 'simplebar';
+var _indexScss = require("../styles/index.scss");
 new SimpleBar(document.querySelector('.card-description__left'), {
     autoHide: false
 });
@@ -700,7 +701,7 @@ if (document.querySelector('.to-top')) document.querySelector('.to-top').addEven
     (0, _smoothScroll.scrollTo)(document.querySelector('.site-container'));
 });
 
-},{"./vendor/focus-visible.min.js":"e0qwT","./components/main-slider":"gCJVH","./components/catalog-slider":"i5QOd","./components/catalog-filter-toggle":"eU3e5","./components/catalog-props":"87Nhy","./components/card-select":"g6j4b","./components/stepper":"9rIpa","./components/card-slider":"1IPDM","./components/card-bottom-tabs":"fMJzf","./components/products":"b2taR","./components/cart":"9Lpwn","./components/cabinet":"lCbdd","./components/contact-us":"6WT60","./components/product":"9FGTP","./components/catalog":"5pDHo","./components/admin-panel":"djDUO","./components/order":"dXYiq","../js/_vars":"jTXjv","./functions/resize":"fuZTU","./functions/smooth-scroll":"3sRwB","./functions/stop-scroll":"bD8Y4","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"e0qwT":[function(require,module,exports,__globalThis) {
+},{"./vendor/focus-visible.min.js":"e0qwT","./components/main-slider":"gCJVH","./components/catalog-slider":"i5QOd","./components/catalog-filter-toggle":"eU3e5","./components/catalog-props":"87Nhy","./components/card-select":"g6j4b","./components/stepper":"9rIpa","./components/card-slider":"1IPDM","./components/card-bottom-tabs":"fMJzf","./components/products":"b2taR","./components/cart":"9Lpwn","./components/cabinet":"lCbdd","./components/contact-us":"6WT60","./components/product":"9FGTP","./components/catalog":"5pDHo","./components/admin-panel":"djDUO","./components/order":"dXYiq","../js/_vars":"jTXjv","./functions/resize":"fuZTU","./functions/smooth-scroll":"3sRwB","./functions/stop-scroll":"bD8Y4","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","../styles/index.scss":"aSOSS"}],"e0qwT":[function(require,module,exports,__globalThis) {
 !function(e, t) {
     t();
 }(0, function() {
@@ -5060,6 +5061,6 @@ const enableScroll = (fix)=>{
     document.body.removeAttribute('data-position');
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}]},["93v64","lhpGb"], "lhpGb", "parcelRequire79d6", {})
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"aSOSS":[function() {},{}]},["93v64","lhpGb"], "lhpGb", "parcelRequire79d6", {})
 
 //# sourceMappingURL=client.b828852a.js.map
