@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "parcel clean",
     "frontend": "parcel src/index.html",
-    "frontend:prod": "parcel build src/index.html --dist-dir dist",
+    "frontend:prod": "parcel build src/index.html --dist-dir dist --public-url .",
     "style-format": "npx stylelint 'src/**/*.scss' --fix --allow-empty-input",
     "format": "prettier --ignore-path .prettierignore --write './src/**/*.{html,css,scss}'",
     "lint": "npm run style-format && npm run format && mate-scripts lint",
