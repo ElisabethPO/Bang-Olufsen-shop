@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   console.log('Selected product:', productId);
 
   try {
-    const response = await fetch(`http://localhost:5000/api/products/${productId}`);
+    const response = await fetch(`/api/products/${productId}`);
     if (!response.ok) {
       throw new Error(`Error HTTP: ${response.status}`);
     }
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   relatedProductsContainer.innerHTML = '';
 
   try {
-    const response = await fetch('http://localhost:5000/api/products/related-products');
+    const response = await fetch('/api/products/related-products');
     if (!response.ok) {
       throw new Error('Error HTTP: ' + response.status);
     }
