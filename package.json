@@ -1,13 +1,13 @@
 {
   "name": "layout_landing-page",
-  "homepage": "Bang-Olufsen-shop",
+  "homepage": "https://ElisabethPO.github.io/Bang-Olufsen-shop/",
   "version": "1.0.0",
   "description": "Landing page",
   "type": "module",
   "scripts": {
     "clean": "parcel clean",
     "frontend": "parcel src/index.html",
-    "frontend:prod": "parcel build src/index.html --dist-dir dist --public-url .",
+    "frontend:prod": "parcel build src/index.html --dist-dir dist --public-url ./",
     "style-format": "npx stylelint 'src/**/*.scss' --fix --allow-empty-input",
     "format": "prettier --ignore-path .prettierignore --write './src/**/*.{html,css,scss}'",
     "lint": "npm run style-format && npm run format && mate-scripts lint",
