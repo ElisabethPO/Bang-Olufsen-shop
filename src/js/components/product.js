@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', async function () {
   const productContainer = document.querySelector('.container-narrow');
+
+  const BASE_URL = 'https://tech-showcase-store.onrender.com';
+
   if (!productContainer) {
     console.error('Error: Container .container-narrow not found on page');
     return;
@@ -19,7 +22,8 @@ document.addEventListener('DOMContentLoaded', async function () {
   console.log('Selected product:', productId);
 
   try {
-    const response = await fetch(`/api/products/${productId}`);
+    const response = await fetch(`${BASE_URL}/api/products/${productId}`);
+
     if (!response.ok) {
       throw new Error(`Error HTTP: ${response.status}`);
     }
@@ -71,7 +75,8 @@ document.addEventListener('DOMContentLoaded', async function () {
   relatedProductsContainer.innerHTML = '';
 
   try {
-    const response = await fetch('/api/products/related-products');
+    const response = await fetch(`${BASE_URL}/api/products/${productId}`);
+
     if (!response.ok) {
       throw new Error('Error HTTP: ' + response.status);
     }
