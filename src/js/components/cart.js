@@ -15,7 +15,6 @@ vars.$cartButtons.forEach((button) => {
   });
 });
 
-
 vars.$buyButtons.forEach((button) => {
   button.addEventListener('click', (e) => {
     e.preventDefault();
@@ -23,7 +22,6 @@ vars.$buyButtons.forEach((button) => {
     vars.$cartCounter.textContent = count;
   });
 });
-
 
 document.querySelectorAll('.cart__btn').forEach(button => {
   button.addEventListener('click', function () {

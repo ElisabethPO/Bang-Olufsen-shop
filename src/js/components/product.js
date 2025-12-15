@@ -1,23 +1,31 @@
+const BASE_URL = 'https://tech-showcase-store.onrender.com';
+const params = new URLSearchParams(window.location.search);
+const productId = params.get('id');
+
 document.addEventListener('DOMContentLoaded', async function () {
   const productContainer = document.querySelector('.container-narrow');
-
-  const BASE_URL = 'https://tech-showcase-store.onrender.com';
 
   if (!productContainer) {
     console.error('Error: Container .container-narrow not found on page');
     return;
   }
-  console.log('dwqdqwdqwwq')
-
-  const params = new URLSearchParams(window.location.search);
-  console.log('params', params)
-  console.log('params', params.get('id'))
-  let productId = params.get('id')
 
   if (!productId) {
-    console.error('Error: Product ID not specified in URL and not found in LocalStorage');
+    console.error('Error: Product ID not specified in URL...');
     return;
   }
+
+  const params = new URLSearchParams(window.location.search);
+  console.log('params', params);
+  console.log('params', params.get('id'));
+  // let productId = params.get('id');
+
+  // if (!productId) {
+  //   console.error(
+  //     'Error: Product ID not specified in URL and not found in LocalStorage',
+  //   );
+  //   return;
+  // }
 
   console.log('Selected product:', productId);
 
@@ -37,45 +45,55 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (titleElement) titleElement.textContent = product.name || 'Untitled';
 
     const codeElement = document.querySelector('.product__code');
-    if (codeElement) codeElement.textContent = `Product code: ${product._id || 'N/A'}`;
+    if (codeElement)
+      codeElement.textContent = `Product code: ${product._id || 'N/A'}`;
 
     const priceElement = document.querySelector('.info-price__current');
     if (priceElement) priceElement.textContent = `$${product.price || '0.00'}`;
 
     const descriptionElement = document.querySelector('.card-info__descr');
-    if (descriptionElement) descriptionElement.textContent = product.description || 'Description missing';
+    if (descriptionElement)
+      descriptionElement.textContent =
+        product.description || 'Description missing';
 
     const productImage = document.querySelector('.card-slider__main img');
     if (productImage) {
-      productImage.src = product.picture ? `data:image/jpeg;base64,${product.picture}` : 'placeholder.jpg';
+      productImage.src = product.picture
+        ? `data:image/jpeg;base64,${product.picture}`
+        : 'placeholder.jpg';
       productImage.alt = product.name || 'Product image';
     }
 
-    const descriptionBlocks = document.querySelectorAll('.card-description__content');
+    const descriptionBlocks = document.querySelectorAll(
+      '.card-description__content',
+    );
     if (descriptionBlocks.length > 0) {
       descriptionBlocks.forEach((block, index) => {
         block.innerHTML = `<p>${index === 0 ? product.description : product.extradescription || 'Дополнительное описание отсутствует.'}</p>`;
       });
     }
-
   } catch (error) {
     console.error('Error loading product data:', error);
   }
 });
 
-
 document.addEventListener('DOMContentLoaded', async function () {
-  const relatedProductsContainer = document.querySelector('.card-related__content');
+  const relatedProductsContainer = document.querySelector(
+    '.card-related__content',
+  );
 
   if (!relatedProductsContainer) {
-    console.error('Error: The container .card-related__content was not found on the page.');
+    console.error(
+      'Error: The container .card-related__content was not found on the page.',
+    );
     return;
   }
 
-  relatedProductsContainer.innerHTML = '';
+  // relatedProductsContainer.innerHTML = '';
+  const fetchURL = `${BASE_URL}/api/products/related-products?current_id=${productId}`;
 
   try {
-    const response = await fetch(`${BASE_URL}/api/products/${productId}`);
+    const response = await fetch(fetchURL);
 
     if (!response.ok) {
       throw new Error('Error HTTP: ' + response.status);
@@ -88,7 +106,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       return;
     }
 
-    products.forEach(product => {
+    products.forEach((product) => {
       const productElement = document.createElement('article');
       productElement.classList.add('product');
 
