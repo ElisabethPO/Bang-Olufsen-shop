@@ -669,14 +669,8 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 },{}],"gIQFi":[function(require,module,exports,__globalThis) {
 /**
  * Swiper 5.4.0
- * Most modern mobile touch slider and framework with hardware accelerated transitions
- * http://swiperjs.com
- *
- * Copyright 2014-2020 Vladimir Kharlampidi
  *
  * Released under the MIT License
- *
- * Released on: May 15, 2020
  */ !function(e, t) {
     module.exports = t();
 }(this, function() {

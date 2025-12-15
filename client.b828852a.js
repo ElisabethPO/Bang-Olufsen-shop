@@ -690,7 +690,6 @@ var _varsDefault = parcelHelpers.interopDefault(_vars);
 var _resize = require("./functions/resize");
 var _smoothScroll = require("./functions/smooth-scroll");
 var _stopScroll = require("./functions/stop-scroll");
-// import SimpleBar from 'simplebar';
 var _indexScss = require("../styles/index.scss");
 new SimpleBar(document.querySelector('.card-description__left'), {
     autoHide: false
@@ -701,7 +700,7 @@ if (document.querySelector('.to-top')) document.querySelector('.to-top').addEven
     (0, _smoothScroll.scrollTo)(document.querySelector('.site-container'));
 });
 
-},{"./vendor/focus-visible.min.js":"e0qwT","./components/main-slider":"gCJVH","./components/catalog-slider":"i5QOd","./components/catalog-filter-toggle":"eU3e5","./components/catalog-props":"87Nhy","./components/card-select":"g6j4b","./components/stepper":"9rIpa","./components/card-slider":"1IPDM","./components/card-bottom-tabs":"fMJzf","./components/products":"b2taR","./components/cart":"9Lpwn","./components/cabinet":"lCbdd","./components/contact-us":"6WT60","./components/product":"9FGTP","./components/catalog":"5pDHo","./components/admin-panel":"djDUO","./components/order":"dXYiq","../js/_vars":"jTXjv","./functions/resize":"fuZTU","./functions/smooth-scroll":"3sRwB","./functions/stop-scroll":"bD8Y4","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","../styles/index.scss":"aSOSS"}],"e0qwT":[function(require,module,exports,__globalThis) {
+},{"./vendor/focus-visible.min.js":"e0qwT","./components/main-slider":"gCJVH","./components/catalog-slider":"i5QOd","./components/catalog-filter-toggle":"eU3e5","./components/catalog-props":"87Nhy","./components/card-select":"g6j4b","./components/stepper":"9rIpa","./components/card-slider":"1IPDM","./components/card-bottom-tabs":"fMJzf","./components/products":"b2taR","./components/cart":"9Lpwn","./components/cabinet":"lCbdd","./components/contact-us":"6WT60","./components/product":"9FGTP","./components/catalog":"5pDHo","./components/admin-panel":"djDUO","./components/order":"dXYiq","../js/_vars":"jTXjv","./functions/resize":"fuZTU","./functions/smooth-scroll":"3sRwB","./functions/stop-scroll":"bD8Y4","../styles/index.scss":"aSOSS","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"e0qwT":[function(require,module,exports,__globalThis) {
 !function(e, t) {
     t();
 }(0, function() {
@@ -784,14 +783,9 @@ const bannerSlider = new (0, _swiperMinJsDefault.default)((0, _varsDefault.defau
 },{"../vendor/swiper.min.js":"1fVdY","../_vars":"jTXjv","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"1fVdY":[function(require,module,exports,__globalThis) {
 /**
  * Swiper 5.3.7
- * Most modern mobile touch slider and framework with hardware accelerated transitions
- * http://swiperjs.com
- *
- * Copyright 2014-2020 Vladimir Kharlampidi
  *
  * Released under the MIT License
  *
- * Released on: April 10, 2020
  */ !function(e, t) {
     module.exports = t();
 }(this, function() {
@@ -4615,14 +4609,17 @@ if (productsGrid) {
         });
     };
     fetchProducts(quantityProducts);
-    loadMore.addEventListener('click', (e)=>{
-        quantityProducts = quantityProducts + 5;
-        console.log(quantityProducts);
-        console.log(dataLength);
-        fetchProducts(quantityProducts);
-        if (quantityProducts == dataLength) loadMore.style.display = 'none';
-        else loadMore.style.display = 'inline-flex';
-    });
+// loadMore.addEventListener('click', (e) => {
+//   quantityProducts = quantityProducts + 5;
+//   console.log(quantityProducts);
+//   console.log(dataLength);
+//   fetchProducts(quantityProducts);
+//   if (quantityProducts == dataLength) {
+//     loadMore.style.display = 'none';
+//   } else {
+//     loadMore.style.display = 'inline-flex';
+//   }
+// });
 }
 
 },{}],"9Lpwn":[function(require,module,exports,__globalThis) {
@@ -4681,10 +4678,10 @@ document.addEventListener("DOMContentLoaded", function() {
     };
     const totalPriceElement = document.querySelector(".cart__total-value");
     if (!vars.cartProductsList || !totalPriceElement) {
-        console.error("\u041F\u043E\u043C\u0438\u043B\u043A\u0430: \u041D\u0435 \u0437\u043D\u0430\u0439\u0434\u0435\u043D\u043E vars.cartProductsList \u0438\u043B\u0438 .cart__total-value");
+        console.error("Error: vars.cartProductsList or .cart__total-value not found");
         return;
     }
-    console.log("\u041A\u043E\u0448\u0438\u043A \u0437\u0430\u043F\u043E\u0432\u043D\u0435\u043D\u043E!");
+    console.log("Cart full!");
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     function updateCartDisplay() {
         vars.cartProductsList.innerHTML = "";
@@ -4783,7 +4780,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const inputs = form.querySelectorAll('input, textarea');
         let allFilled = true;
         inputs.forEach((input)=>{
-            console.log(`\u{417}\u{43D}\u{430}\u{447}\u{435}\u{43D}\u{438}\u{435} \u{43F}\u{43E}\u{43B}\u{44F} "${input.placeholder}": "${input.value}"`);
+            console.log(`Field value "${input.placeholder}": "${input.value}"`);
             if (input.value.trim() === '') allFilled = false;
         });
         if (allFilled) {
@@ -4794,64 +4791,73 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 },{}],"9FGTP":[function(require,module,exports,__globalThis) {
+const BASE_URL = 'https://tech-showcase-store.onrender.com';
+const params = new URLSearchParams(window.location.search);
+const productId = params.get('id');
 document.addEventListener('DOMContentLoaded', async function() {
     const productContainer = document.querySelector('.container-narrow');
     if (!productContainer) {
-        console.error("\u041E\u0448\u0438\u0431\u043A\u0430: \u043A\u043E\u043D\u0442\u0435\u0439\u043D\u0435\u0440 .container-narrow \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D \u043D\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435");
+        console.error('Error: Container .container-narrow not found on page');
         return;
     }
-    console.log('dwqdqwdqwwq');
+    if (!productId) {
+        console.error('Error: Product ID not specified in URL...');
+        return;
+    }
     const params = new URLSearchParams(window.location.search);
     console.log('params', params);
     console.log('params', params.get('id'));
-    let productId = params.get('id');
-    if (!productId) {
-        console.error("\u041E\u0448\u0438\u0431\u043A\u0430: ID \u0442\u043E\u0432\u0430\u0440\u0430 \u043D\u0435 \u0443\u043A\u0430\u0437\u0430\u043D \u0432 URL \u0438 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D \u0432 LocalStorage");
-        return;
-    }
-    console.log("\u0412\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0439 \u0442\u043E\u0432\u0430\u0440:", productId);
+    // let productId = params.get('id');
+    // if (!productId) {
+    //   console.error(
+    //     'Error: Product ID not specified in URL and not found in LocalStorage',
+    //   );
+    //   return;
+    // }
+    console.log('Selected product:', productId);
     try {
-        const response = await fetch(`http://localhost:5000/api/products/${productId}`);
-        if (!response.ok) throw new Error(`\u{41E}\u{448}\u{438}\u{431}\u{43A}\u{430} HTTP: ${response.status}`);
+        const response = await fetch(`${BASE_URL}/api/products/${productId}`);
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         const product = await response.json();
         if (!product) {
-            console.error("\u041E\u0448\u0438\u0431\u043A\u0430: \u0442\u043E\u0432\u0430\u0440 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D");
+            console.error('Error: Product not found');
             return;
         }
         const titleElement = document.querySelector('.card-info__title');
-        if (titleElement) titleElement.textContent = product.name || "\u0411\u0435\u0437 \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F";
+        if (titleElement) titleElement.textContent = product.name || 'Untitled';
         const codeElement = document.querySelector('.product__code');
         if (codeElement) codeElement.textContent = `Product code: ${product._id || 'N/A'}`;
         const priceElement = document.querySelector('.info-price__current');
         if (priceElement) priceElement.textContent = `$${product.price || '0.00'}`;
         const descriptionElement = document.querySelector('.card-info__descr');
-        if (descriptionElement) descriptionElement.textContent = product.description || "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442";
+        if (descriptionElement) descriptionElement.textContent = product.description || 'Description missing';
         const productImage = document.querySelector('.card-slider__main img');
         if (productImage) {
             productImage.src = product.picture ? `data:image/jpeg;base64,${product.picture}` : 'placeholder.jpg';
-            productImage.alt = product.name || "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435 \u0442\u043E\u0432\u0430\u0440\u0430";
+            productImage.alt = product.name || 'Product image';
         }
         const descriptionBlocks = document.querySelectorAll('.card-description__content');
         if (descriptionBlocks.length > 0) descriptionBlocks.forEach((block, index)=>{
             block.innerHTML = `<p>${index === 0 ? product.description : product.extradescription || "\u0414\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0435 \u043E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043E\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442."}</p>`;
         });
     } catch (error) {
-        console.error("\u041E\u0448\u0438\u0431\u043A\u0430 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0438 \u0434\u0430\u043D\u043D\u044B\u0445 \u043E \u0442\u043E\u0432\u0430\u0440\u0435:", error);
+        console.error('Error loading product data:', error);
     }
 });
 document.addEventListener('DOMContentLoaded', async function() {
     const relatedProductsContainer = document.querySelector('.card-related__content');
     if (!relatedProductsContainer) {
-        console.error("\u041E\u0448\u0438\u0431\u043A\u0430: \u043A\u043E\u043D\u0442\u0435\u0439\u043D\u0435\u0440 .card-related__content \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D \u043D\u0430 \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0435");
+        console.error('Error: The container .card-related__content was not found on the page.');
         return;
     }
-    relatedProductsContainer.innerHTML = '';
+    // relatedProductsContainer.innerHTML = '';
+    const fetchURL = `${BASE_URL}/api/products/related-products?current_id=${productId}`;
     try {
-        const response = await fetch('http://localhost:5000/api/products/related-products');
-        if (!response.ok) throw new Error("\u041E\u0448\u0438\u0431\u043A\u0430 HTTP: " + response.status);
+        const response = await fetch(fetchURL);
+        if (!response.ok) throw new Error('Error HTTP: ' + response.status);
         const products = await response.json();
         if (products.length === 0) {
-            console.error("\u041E\u0448\u0438\u0431\u043A\u0430: \u043D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0442\u043E\u0432\u0430\u0440\u044B");
+            console.error('Error: Failed to load items');
             return;
         }
         products.forEach((product)=>{
@@ -4881,7 +4887,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             relatedProductsContainer.appendChild(productElement);
         });
     } catch (error) {
-        console.error("\u041E\u0448\u0438\u0431\u043A\u0430 \u043F\u0440\u0438 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0435 \u0434\u0430\u043D\u043D\u044B\u0445 \u043E \u0442\u043E\u0432\u0430\u0440\u0430\u0445:", error);
+        console.error('Error loading product data:', error);
     }
 });
 
@@ -4982,7 +4988,7 @@ document.querySelector(".cart__checkout").addEventListener("click", async ()=>{
         });
     });
     try {
-        const response = await fetch("http://localhost:5000/api/orders", {
+        const response = await fetch("https://tech-showcase-store.onrender.com/api/orders", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
