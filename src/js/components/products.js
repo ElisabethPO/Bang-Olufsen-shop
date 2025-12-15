@@ -40,17 +40,17 @@ if (productsGrid) {
 
 fetchProducts(quantityProducts);
 
-loadMore.addEventListener('click', (e) => {
-  quantityProducts = quantityProducts + 5;
-  console.log(quantityProducts);
-  console.log(dataLength);
+// loadMore.addEventListener('click', (e) => {
+//   quantityProducts = quantityProducts + 5;
+//   console.log(quantityProducts);
+//   console.log(dataLength);
 
-  fetchProducts(quantityProducts);
+//   fetchProducts(quantityProducts);
 
-  if (quantityProducts == dataLength) {
-    loadMore.style.display = 'none';
-  } else {
-    loadMore.style.display = 'inline-flex';
-  }
-});
+//   if (quantityProducts == dataLength) {
+//     loadMore.style.display = 'none';
+//   } else {
+//     loadMore.style.display = 'inline-flex';
+//   }
+// });
 }
