@@ -107,30 +107,68 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     products.forEach((product) => {
+      // const productElement = document.createElement('article');
+      // productElement.classList.add('product');
+
+      // productElement.innerHTML = `
+      //       <article class="product">
+      //         ${product.type === 'new' ? '<span class="product-prop product__prop new">New</span>' : ''}
+      //           <div class="product__top">
+      //             <img src="${product.picture ? `data:image/jpeg;base64,${product.picture}` : 'placeholder.jpg'}"
+      //                   alt="${product.name}"
+      //                   class="product__image">
+      //           </div>
+      //           <h2 class="product__title">
+      //             <a href="product.html?id=${product._id}" class="product-link" data-id="${product._id}">
+      //               ${product.name}
+      //             </a>
+      //           </h2>
+      //           <p class="product__code">Product code: ${product._id || 'N/A'}</p>
+      //           <p class="product__price">
+      //             <span class="product__price-name">Price:</span>
+      //             <span class="product__price-value">$${product.price || '0.00'}</span>
+      //           </p>
+      //           <a href="#" class="product__button" data-qa="product-hover">Buy</a>
+      //       </article>
+      //   `;
+
       const productElement = document.createElement('article');
       productElement.classList.add('product');
 
       productElement.innerHTML = `
-            <article class="product">
-              ${product.type === 'new' ? '<span class="product-prop product__prop new">New</span>' : ''}
-                <div class="product__top">
-                  <img src="${product.picture ? `data:image/jpeg;base64,${product.picture}` : 'placeholder.jpg'}"
-                        alt="${product.name}"
-                        class="product__image">
-                </div>
-                <h2 class="product__title">
-                  <a href="product.html?id=${product._id}" class="product-link" data-id="${product._id}">
-                    ${product.name}
-                  </a>
-                </h2>
-                <p class="product__code">Product code: ${product._id || 'N/A'}</p>
-                <p class="product__price">
-                  <span class="product__price-name">Price:</span>
-                  <span class="product__price-value">$${product.price || '0.00'}</span>
-                </p>
-                <a href="#" class="product__button" data-qa="product-hover">Buy</a>
-            </article>
-        `;
+    ${
+      product.type === 'new'
+        ? '<span class="product-prop product__prop new">New</span>'
+        : ''
+    }
+
+    <div class="product__top">
+      <img
+        src="${
+          product.picture
+            ? `data:image/jpeg;base64,${product.picture}`
+            : 'placeholder.jpg'
+        }"
+        alt="${product.name}"
+        class="product__image"
+      >
+    </div>
+
+    <h2 class="product__title">
+      <a href="product.html?id=${product._id}">
+        ${product.name}
+      </a>
+    </h2>
+
+    <p class="product__code">Product code: ${product._id}</p>
+
+    <p class="product__price">
+      <span class="product__price-name">Price:</span>
+      <span class="product__price-value">$${product.price}</span>
+    </p>
+
+    <a href="#" class="product__button">Buy</a>
+  `;
 
       relatedProductsContainer.appendChild(productElement);
     });
