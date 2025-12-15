@@ -6,8 +6,7 @@
 
 | Service | Address |
 | :--- | :--- |
-| **Frontend (Catalog)** |  [🚀 Video Presentation](https://www.loom.com/share/9bca9101cd794e00b63bb6ff1e236f96) |
-| **Backend** | [GitHub](https://github.com/ElisabethPO/diploma-backend)|
+| **Frontend (Catalog)** |  [🚀 Live Bang & Olufsen](https://elisabethpo.github.io/Bang-Olufsen-shop) |
 | **Backend (API)** | [JSON Data: All Products Endpoint](https://tech-showcase-store.onrender.com/api/products) |
 
 ---
